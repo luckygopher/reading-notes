@@ -12,9 +12,9 @@ import (
 )
 
 func main() {
-	dup1()
+	//dup1()
 	dup2()
-	dup3()
+	//dup3()
 }
 
 // Dup1 prints the text of each line that appears more than
@@ -22,13 +22,14 @@ func main() {
 func dup1() {
 	counts := make(map[string]int)
 	input := bufio.NewScanner(os.Stdin)
+	// 统计重复行
 	for input.Scan() {
 		counts[input.Text()]++
 	}
 	// NOTE: ignoring potential errors form input.Err()
 	for line, n := range counts {
 		if n > 1 {
-			fmt.Printf("%d\t%s\n", n, line)
+			fmt.Printf("行：%s\t重复次数：%d\n", line, n)
 		}
 	}
 }
@@ -49,9 +50,10 @@ func dup2() {
 			f.Close()
 		}
 	}
+
 	for line, n := range counts {
 		if n > 1 {
-			fmt.Printf("%d\t%s\n", n, line)
+			fmt.Printf("行：%s\t重复次数：%d\n", line, n)
 		}
 	}
 }
@@ -59,6 +61,9 @@ func dup2() {
 func countLines(f *os.File, counts map[string]int) {
 	input := bufio.NewScanner(f)
 	for input.Scan() {
+		if counts[input.Text()] != 0 {
+			fmt.Printf("文件:%s\t出现重复行\t内容:%s\n", f.Name(), input.Text())
+		}
 		counts[input.Text()]++
 	}
 }
@@ -67,7 +72,9 @@ func dup3() {
 	counts := make(map[string]int)
 	files := os.Args[1:]
 	// 追加标准输入，如果命令行参数为空则从标准输入获取
-	files = append(files, "/dev/stdin")
+	if len(files) == 0 {
+		files = append(files, "/dev/stdin")
+	}
 	for _, file := range files {
 		byteData, err := ioutil.ReadFile(file)
 		if err != nil {
@@ -79,9 +86,9 @@ func dup3() {
 			counts[line]++
 		}
 	}
-	for s, i := range counts {
-		if i > 0 {
-			fmt.Printf("line:%d\tdata:%s", i, s)
+	for line, n := range counts {
+		if n > 1 {
+			fmt.Printf("行：%s\t重复次数：%d\n", line, n)
 		}
 	}
 }

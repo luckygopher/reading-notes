@@ -1,7 +1,7 @@
 // @Description: 1.4 GIF动画
 // @Author: Arvin
 // @date: 2021/1/27 2:41 下午
-package main
+package lissajous
 
 import (
 	"image"
@@ -10,8 +10,6 @@ import (
 	"io"
 	"math"
 	"math/rand"
-	"os"
-	"time"
 )
 
 var green = color.RGBA{R: uint8(0), G: uint8('x'), B: uint8('G'), A: uint8('G')}
@@ -24,16 +22,16 @@ const (
 	greenIndex = 2 // 调色板中的绿色
 )
 
-func main() {
-	// 图像序列是确定的，除非我们seed
-	// 使用当前时间的伪随机数生成器
-	rand.Seed(time.Now().UTC().UnixNano())
-	lissajous(os.Stdout)
-}
+//func main() {
+//	// 图像序列是确定的，除非我们seed
+//	// 使用当前时间的伪随机数生成器
+//	rand.Seed(time.Now().UTC().UnixNano())
+//	Lissajous(os.Stdout, 5)
+//}
 
-func lissajous(out io.Writer) {
+// cycles 完整x振荡器转数
+func Lissajous(out io.Writer, cycles float64) {
 	const (
-		cycles  = 5     // 完整x振荡器转数
 		res     = 0.001 // 角分辨率
 		size    = 100   // 图像画布封面尺寸 [-size..+size]
 		nframes = 64    // 动画帧数

@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/reading-notes/go-bible/lissajous"
+	"github.com/reading-notes/go-bible/ch1/lissajous"
 )
 
 func main() {

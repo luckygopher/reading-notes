@@ -33,13 +33,13 @@ func KToC(k Kelvin) Celsius {
 }
 
 func (k Kelvin) String() string {
-	return fmt.Sprintf("%fK", k)
+	return fmt.Sprintf("%gK", k)
 }
 
 func (c Celsius) String() string {
-	return fmt.Sprintf("%f°C", c)
+	return fmt.Sprintf("%g°C", c)
 }
 
 func (f Fahrenheit) String() string {
-	return fmt.Sprintf("%fF", f)
+	return fmt.Sprintf("%g°F", f)
 }

@@ -128,18 +128,3 @@ func BytesPackage() {
 	fmt.Printf("%s\n", obj.String()) // abcdefg
 	fmt.Printf("%s\n", bb)           // Hello World!
 }
-
-// strings包
-func StringsPackage() {
-
-}
-
-// strconv包
-func StrconvPackage() {
-
-}
-
-// unicode包
-func UnicodePackage() {
-
-}

@@ -9,16 +9,6 @@ import (
 	"os"
 )
 
-func main() {
-	// // 对一个任意的字节slice类型的数据生成一个对应的消息摘要
-	// c1 := sha256.Sum256([]byte("x"))
-	// c2 := sha256.Sum256([]byte("X"))
-	// // %x 十六进制
-	// fmt.Printf("%x\n%x\n%t\n%T\n", c1, c2, c1 == c2, c1)
-	// fmt.Println(countBit("2", "4"))
-	InSHA256()
-}
-
 // 1byte = 8bit
 // 计算两个SHA256哈希码中不同bit的数目
 func countBit(str1, str2 string) int {

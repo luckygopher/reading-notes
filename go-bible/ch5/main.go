@@ -5,20 +5,20 @@ package main
 
 import (
 	"fmt"
-	"os"
 
 	"golang.org/x/net/html"
 )
 
 func main() {
-	doc, err := html.Parse(os.Stdin)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "findlinks1: %v\n", err)
-		os.Exit(1)
-	}
-	for _, link := range visit(nil, doc) {
-		fmt.Println(link)
-	}
+	// doc, err := html.Parse(os.Stdin)
+	// if err != nil {
+	// 	fmt.Fprintf(os.Stderr, "findlinks1: %v\n", err)
+	// 	os.Exit(1)
+	// }
+	// for _, link := range visit(nil, doc) {
+	// 	fmt.Println(link)
+	// }
+	fmt.Println(panicAndRecover(5))
 }
 
 func visit(links []string, n *html.Node) []string {
@@ -33,4 +33,23 @@ func visit(links []string, n *html.Node) []string {
 		links = visit(links, c)
 	}
 	return links
+}
+
+func panicAndRecover(n int) (result int, err error) {
+	defer func() {
+		switch r := recover(); r {
+		case "gt10":
+			err = fmt.Errorf("panic error %v", r)
+		case nil:
+			result = 10
+		default:
+			panic(r)
+		}
+	}()
+	if n > 10 {
+		panic("gt10")
+	} else if n < 4 {
+		panic("lt4")
+	}
+	return
 }
